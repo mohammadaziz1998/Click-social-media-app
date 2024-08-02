@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
   friends: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   posts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }],
   passwordChangedAt: Date,
+  history: [String],
 });
 userSchema.pre('save', function (next) {
   console.log('pre');

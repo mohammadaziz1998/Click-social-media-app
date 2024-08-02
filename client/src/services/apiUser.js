@@ -59,7 +59,7 @@ export async function logout() {
   });
 }
 export async function updateUserInfo(data) {
-  const response = await axios({
+  await axios({
     url: `${Base_Url}api/v1/users/updateinfo`,
     method: 'POST',
     withCredentials: true,
@@ -67,10 +67,45 @@ export async function updateUserInfo(data) {
   });
 }
 export async function updatePasswordApi(data) {
-  const response = await axios({
+  await axios({
     url: `${Base_Url}api/v1/users/updatepassword`,
     method: 'POST',
     withCredentials: true,
     data,
   });
+}
+
+export async function searchFriends(data) {
+  // const searchText = data.queryKey[1];
+  if (!data || data.length <= 2) return [];
+
+  const response = await axios(`${Base_Url}api/v1/users/search/${data}`, {
+    withCredentials: true,
+  });
+  console.log(response);
+  return response.data.friends;
+}
+
+export async function autoComplete(data) {
+  const searchText = data.queryKey[1];
+  if (!searchText || searchText.length <= 2) return [];
+
+  const response = await axios(
+    `${Base_Url}api/v1/users/autocomplete/${searchText}`,
+    {
+      withCredentials: true,
+    }
+  );
+  // console.log(response);
+  return response.data.friends;
+}
+
+export async function getFriendPage(data) {
+  console.log(data);
+  const id = data.queryKey[1];
+  const response = await axios(`${Base_Url}api/v1/users/friendpage/${id}`, {
+    withCredentials: true,
+  });
+
+  return response.data.friend;
 }

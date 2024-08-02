@@ -28,7 +28,7 @@ function FriendsSidebar() {
         {currentUser?.friends.length === 0 && <p>no friends</p>}
         {currentUser?.friends?.map((friend) => (
           <UserNav
-            imgUrl={`/users/${friend.photo}`}
+            imgUrl={friend.photo}
             name={friend.name}
             sizes="medium"
             active={friend.active}

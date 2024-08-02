@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AuthenticationLayout = styled.div`
-  background-color: #d2f4e8;
+  background-color: var(--color-green-00);
   display: flex;
   flex-direction: column;
   width: auto;

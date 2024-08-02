@@ -22,7 +22,7 @@ const nameSizes = {
     font-size: 1.3rem;
   `,
   large: css`
-    font-size: 4rem;
+    font-size: 1.5rem;
   `,
 };
 
@@ -30,20 +30,21 @@ const StyledUserNav = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
   div {
     margin-top: 1.2rem;
 
     border-radius: 50%;
-    background-color: #00e400;
+    background-color: #31cc31;
     width: 10px;
     height: 10px;
     position: absolute;
-  }
-  img {
-    border-radius: 50%;
+    z-index: 1000;
   }
 `;
 const Img = styled.img`
+  z-index: auto;
+  border-radius: 50%;
   ${(props) => sizes[props.sizes]}
 `;
 
@@ -55,7 +56,7 @@ function UserNav({ sizes, imgUrl, name, active }) {
   return (
     <StyledUserNav>
       {active && <div></div>}
-      <Img src={imgUrl} alt={name} sizes={sizes} />
+      <Img src={`/images/profile/${imgUrl}`} alt={name} sizes={sizes} />
       <StyledUserName sizes={sizes}>{name}</StyledUserName>
     </StyledUserNav>
   );

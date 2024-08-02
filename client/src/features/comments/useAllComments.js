@@ -4,6 +4,7 @@ import { getPostComments } from '../../services/apiComments';
 export function useAllComment(postId) {
   const { data, isFetching, error } = useQuery({
     queryKey: ['comments', postId],
+    retry: false,
 
     queryFn: (postId) => getPostComments(postId),
   });

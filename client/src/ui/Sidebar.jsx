@@ -4,7 +4,6 @@ import { MdAccountCircle } from 'react-icons/md';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdLogout } from 'react-icons/md';
-import { IoMdNotifications } from 'react-icons/io';
 import { FiMessageSquare } from 'react-icons/fi';
 import Modal from '../ui/Modal';
 
@@ -19,7 +18,7 @@ export const StyledSidebarLink = styled.aside`
   row-gap: 1rem;
 
   a {
-    color: var(--color-dark-aqua);
+    color: var(--color-green-05);
     text-decoration: none;
     border-radius: 10px;
     padding: 5px;
@@ -43,7 +42,6 @@ export const StyledSidebarLink = styled.aside`
   }
 `;
 const StyledSidebar = styled.aside`
-  /* background-color: #dcdce6; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,14 +50,12 @@ const StyledSidebar = styled.aside`
     background-color: transparent;
     border: none;
     margin: 1rem 0;
-    color: var(--color-dark-aqua);
+    color: var(--color-green-05);
     font-size: 1.5rem;
     margin-inline: 1rem;
     border-radius: 10px;
   }
-  button:hover {
-    background-color: #aab3ad;
-  }
+
   span {
     display: none;
   }
@@ -94,13 +90,11 @@ function Sidebar() {
           <IoSettingsOutline />
         </SidebarLink>
 
-        <SidebarLink name="freinds">
+        <SidebarLink name="friends">
           <FaUserFriends />
         </SidebarLink>
 
-        <SidebarLink name="notifications">
-          <IoMdNotifications />
-        </SidebarLink>
+        {/* <SidebarLink name="notifications"></SidebarLink> */}
 
         <SidebarLink name="messages">
           <FiMessageSquare />

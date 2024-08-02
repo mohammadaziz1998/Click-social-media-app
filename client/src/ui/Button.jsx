@@ -1,6 +1,26 @@
 import styled, { css } from 'styled-components';
 
 const sizes = {
+  verySmall: css`
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.2rem 0.2rem;
+    text-align: center;
+  `,
+  fit: css`
+    background-color: transparent;
+    border: none;
+    box-shadow: filter(black);
+    font-size: 1.4rem;
+
+    height: 2.5rem;
+    padding: 0.2rem 0.2rem;
+    text-align: center;
+  `,
   small: css`
     font-size: 1.2rem;
     width: 7rem;
@@ -27,7 +47,7 @@ const Button = styled.button`
   padding: 1.2rem 1.6rem;
   font-weight: 500;
   border-radius: 10px;
-  background-color: var(--color-aqua--700);
+  background-color: var(--color-green-05);
   box-shadow: var(--shadow-sm);
   border: none;
   cursor: pointer;

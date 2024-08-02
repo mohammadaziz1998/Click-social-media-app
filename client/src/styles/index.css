@@ -1,0 +1,105 @@
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Dosis', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+}
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 200 to 800
+
+.dosis-<uniquifier > {
+  font-weight: <weight>;
+} */
+#root {
+  --color-aqua-1: #ecfdf6;
+  --color-aqua-12: #e4fcf3;
+  --color-aqua-13: #ddfcf0;
+  --color-aqua-14: #d5fbed;
+  --color-aqua-15: #cdfbea;
+  --color-aqua-16: #c6fae6;
+
+  --color-aqua-17: #bef9e3;
+  --color-aqua-18: #b7f9e0;
+  --color-aqua-19: #aff8dd;
+  --color-aqua-21: #a8f8d9;
+  --color-aqua-22: #a0f7d6;
+  --color-aqua-23: #99f6d3;
+
+  --color-aqua-24: #91f6d0;
+  --color-aqua-25: #89f5cd;
+  --color-aqua-26: #82f5c9;
+  --color-aqua-27: #7af4c6;
+  --color-aqua-28: #73f3c3;
+  --color-aqua-29: #6bf3c0;
+
+  --color-aqua-31: #64f2bc;
+  --color-aqua-32: #5cf2b9;
+  --color-aqua-33: #55f1b6;
+  --color-aqua-34: #4df0b3;
+  --color-aqua-34: #45f0b0;
+  --color-aqua-34: #3eefac;
+
+  --color-aqua-34: #36eea9;
+  --color-aqua-34: #2feea6;
+  --color-aqua-34: #27eda3;
+  --color-aqua-34: #20ed9f;
+  --color-aqua-34: #18ec9c;
+  --color-aqua-34: #12ea99;
+
+  --color-aqua-34: #12e294;
+  --color-aqua-34: #11db8f;
+  --color-aqua-34: #10d38a;
+  --color-aqua-34: #10cc85;
+  --color-aqua-34: #0fc480;
+  --color-aqua-34: #0fbc7b;
+
+  --color-aqua-34: #0eb576;
+  --color-aqua-34: #0dad71;
+  --color-aqua-34: #0da66c;
+  --color-aqua-34: #0c9e67;
+  --color-aqua-34: #0c9762;
+  --color-aqua-34: #0b8f5d;
+
+  --color-aqua-34: #0a8858;
+  --color-aqua-34: #0a8053;
+  --color-aqua-34: #09784e;
+  --color-aqua-34: #09714a;
+  --color-aqua-34: #086945;
+  --color-aqua-34: #076240;
+
+  --color-aqua-34: #075a3b;
+  --color-aqua-34: #065336;
+  --color-aqua-34: #064b31;
+  --color-aqua-34: #05442c;
+  --color-aqua-34: #05442c;
+  --color-aqua-34: #043422;
+
+  --color-aqua-34: #49756c;
+  --color-aqua-34: #519589;
+  --color-aqua-34: #2d514a;
+
+  --color-aqua-34: #0d2022;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+}
+
+@media (min-width: 1000px) {
+  .tooltip {
+    display: none;
+  }
+}

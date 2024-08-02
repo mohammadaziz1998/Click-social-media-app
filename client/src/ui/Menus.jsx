@@ -19,20 +19,20 @@ const StyledToggle = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-green-100);
   }
 
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    color: var(--color-grey-700);
+    color: var(--color-green-50);
   }
 `;
 
 const StyledList = styled.ul`
   position: fixed;
 
-  background-color: var(--color-grey-0);
+  background-color: var(--color-green-00);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
 

@@ -1,6 +1,6 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { HiXMark } from 'react-icons/hi2';
+import { GrClose } from 'react-icons/gr';
 import styled from 'styled-components';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 
@@ -18,16 +18,20 @@ const StyledModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #4db073;
+  background-color: var(--color-green-100);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  padding: 3rem 3.8rem;
+
   transition: all 0.5s;
   width: 70%;
   border-radius: 10px;
-  opacity: 0.9;
+
+  @media (max-width: 600px) {
+    width: 95%;
+  }
 `;
-// const
+
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -38,6 +42,8 @@ const Overlay = styled.div`
   backdrop-filter: blur(4px);
   z-index: 1000;
   transition: all 0.5s;
+  margin-inline: 0;
+  padding-inline: 0;
 `;
 
 const Button = styled.button`
@@ -83,7 +89,7 @@ function Modal({ children }) {
   );
 }
 ////////////////
-function Open({ children, opens: opensWindowName, param }) {
+function Open({ children, opens: opensWindowName }) {
   const { open } = useContext(ModalContext);
   return cloneElement(children, {
     onClick: () => open(opensWindowName),
@@ -104,7 +110,7 @@ function Window({ children, name }) {
       <StyledModal ref={ref}>
         <StyledBaseModal>
           <Button onClick={close}>
-            <HiXMark />
+            <GrClose />
           </Button>
           <div>{cloneElement(children, { onCloseModal: close })}</div>
         </StyledBaseModal>

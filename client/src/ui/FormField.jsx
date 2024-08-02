@@ -10,7 +10,8 @@ const formTypes = {
 };
 
 const FormField = styled.div`
-  margin: 1rem 0;
+  margin: 1rem;
+  padding-bottom: 1rem;
   input {
     border-radius: 4px;
     border: none;

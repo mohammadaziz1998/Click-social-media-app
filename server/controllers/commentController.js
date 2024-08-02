@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const Comments = require('../models/commentsModel');
+const AppError = require('../utils/appError');
 
 exports.createComment = catchAsync(async (req, res, next) => {
   const comment = await Comments.findOneAndUpdate(
@@ -34,7 +35,8 @@ exports.getAllCommentsOnPost = catchAsync(async (req, res, next) => {
     path: 'comments',
     populate: { path: 'user', select: ['name', 'photo'] },
   });
-  if (comments.length < 1)
+
+  if (comments.length === 0)
     return next(new AppError('There is no comments on this post yet', 404));
   res.status(200).json({
     status: 'success',

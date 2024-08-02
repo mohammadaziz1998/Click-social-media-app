@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const BaseFormLayout = styled.div`
-  background-color: #ded8d5;
+  background-color: var(--color-green-100);
   border-radius: 10px;
   margin: 1rem;
   padding: 2rem;

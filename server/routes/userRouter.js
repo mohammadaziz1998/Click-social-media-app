@@ -47,4 +47,20 @@ router.post(
   authController.protect,
   authController.updatePassword
 );
+router.get(
+  '/search/:searchText',
+  authController.protect,
+  userController.findFirends
+);
+router.get(
+  '/autocomplete/:searchText',
+  authController.protect,
+  userController.autoComplete
+);
+router.get(
+  '/friendpage/:id',
+  authController.protect,
+  userController.getFrienPage
+);
+
 module.exports = router;

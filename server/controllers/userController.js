@@ -66,3 +66,66 @@ exports.updateUserInformation = catchAsync(async (req, res, next) => {
     data: updatedUser,
   });
 });
+exports.findFirends = catchAsync(async (req, res, next) => {
+  const searchString = req.params.searchText;
+  const friends = await User.aggregate([
+    {
+      $search: {
+        index: 'searchUsers',
+        text: {
+          query: searchString,
+          path: { wildcard: '*' },
+          fuzzy: {},
+        },
+      },
+    },
+  ]);
+  await User.findByIdAndUpdate(
+    req.user._id,
+
+    {
+      $addToSet: { history: searchString },
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    friends,
+  });
+});
+exports.autoComplete = catchAsync(async (req, res, next) => {
+  const searchString = req.params.searchText;
+  const friends = await User.aggregate([
+    {
+      $search: {
+        index: 'autoCompleteUsers',
+        autocomplete: {
+          query: searchString,
+          path: 'name',
+          tokenOrder: 'sequential',
+        },
+      },
+    },
+    {
+      $limit: 10,
+    },
+    {
+      $project: {
+        name: 1,
+      },
+    },
+  ]);
+
+  res.status(200).json({
+    status: 'success',
+    friends,
+  });
+});
+
+exports.getFrienPage = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  console.log(req.params);
+  const friend = await User.findById(id);
+  if (!friend) return next(new AppError('There is no user with id'));
+  res.status(200).json({ status: 'success', friend });
+});

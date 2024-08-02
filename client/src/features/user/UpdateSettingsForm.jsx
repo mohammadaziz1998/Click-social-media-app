@@ -12,8 +12,8 @@ import ErrorFormMessage from '../../ui/ErrorFormMessage';
 
 function UpdateSettingsForm() {
   const { currentUser } = useCurrentUser();
-  const [name, setName] = useState(currentUser.name);
-  const [age, setAge] = useState(currentUser.age);
+  const [name, setName] = useState(currentUser?.name || '');
+  const [age, setAge] = useState(currentUser?.age || 0);
 
   const {
     register,

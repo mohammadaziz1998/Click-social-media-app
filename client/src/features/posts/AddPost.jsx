@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import CreatePostForm from './CreatePostForm';
 
 const StyledAddPost = styled.div`
-  /* position: relative;
-  z-index: -1; */
   height: 50px;
   border-radius: 10px;
-  background-color: var(--color-dark-aqua);
+  background-color: var(--color-green-100);
   display: flex;
   justify-content: center;
   align-items: center;

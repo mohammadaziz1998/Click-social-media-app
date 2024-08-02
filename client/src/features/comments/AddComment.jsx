@@ -3,12 +3,18 @@ import Button from '../../ui/Button';
 import SpinnerMini from '../../ui/SpinnerMini';
 import { useState } from 'react';
 import { useComment } from './useComment';
+import UserNav from '../../ui/UserNav';
+import { useCurrentUser } from '../user/useCurrentUser';
+
 const StyledAddComment = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 0.2rem;
   justify-content: space-between;
   position: sticky;
   top: 0;
+
+  /* background-color: aliceblue; */
 `;
 
 const StyledAddCommentInput = styled.input`
@@ -19,6 +25,7 @@ const StyledAddCommentInput = styled.input`
   border: none;
 `;
 function AddComment({ postId }) {
+  const { currentUser } = useCurrentUser();
   const [comment, setComment] = useState('');
   const { newComment, isPending } = useComment();
 
@@ -31,6 +38,7 @@ function AddComment({ postId }) {
 
   return (
     <StyledAddComment>
+      <UserNav imgUrl={currentUser?.photo} sizes="medium" />
       <StyledAddCommentInput
         type="text"
         name="comment-field"

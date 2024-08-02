@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Comment from './Comment';
 import AddComment from './AddComment';
 import { useAllComment } from './useAllComments';
-// import Spinner from '../../ui/Spinner';
 import SpinnerMini from '../../ui/SpinnerMini';
 
 const StyledComments = styled.div`

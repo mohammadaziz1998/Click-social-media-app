@@ -4,7 +4,7 @@ import FormLayout from '../ui/FormLayout';
 const StyledErrorDiv = styled.div`
   width: 400px;
   height: 200px;
-  background-color: #ffc5be;
+  background-color: #d2776d;
   border-radius: 10px;
 
   display: flex;

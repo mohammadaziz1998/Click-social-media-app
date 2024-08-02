@@ -1,48 +1,46 @@
 import styled from 'styled-components';
+
 import UserNav from './UserNav';
-import Heading from './Heading';
+
+import Search from '../features/user/Search';
+
+import Logo from './Logo';
+
+import { GrNotification } from 'react-icons/gr';
+
+import { IoIosSearch } from 'react-icons/io';
+
+import Button from './Button';
+
 import { useCurrentUser } from '../features/user/useCurrentUser';
 
+import { NavLink } from 'react-router-dom';
+import DarkModeToogle from './DarkModeToogle';
+import Modal from './Modal';
+
 const StyledHeader = styled.header`
-  /* background-color: var(--color-aqua--700); */
   grid-column: 1/-1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  grid-template-columns: 1fr 2fr 1fr;
+  /* display: grid;
+  grid-template-columns: 0.5fr 2fr 2fr; */
   padding: 0 1rem 0 1rem;
-  /* border-bottom: 1px solid var(--color-border-aqua); */
   box-shadow: inset;
 
-  img {
-    border-radius: 50%;
-    margin-left: 1rem;
-    border: 1px solid var(--color-border-aqua);
-  }
-  input {
-    max-width: 300px;
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-    height: 50px;
-  }
-
-  h2 {
-    color: var(--color-dark-aqua);
-    font-weight: 800;
-  }
-  button {
-    width: 100px;
-    height: 100px;
-  }
-
   @media (max-width: 600px) {
-    height: auto;
   }
-  @media (max-width: 650px) {
-    input {
-      display: none;
-    }
+`;
+
+const HeaderNav = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  column-gap: 1rem;
+  button {
+    color: var(--color-green-05);
+    margin-inline: 0.2rem;
   }
 `;
 
@@ -51,15 +49,34 @@ function Header() {
 
   return (
     <StyledHeader>
-      <Heading as="h2">Click</Heading>
+      <Logo />
 
-      <input type="search" placeholder="search" />
+      <HeaderNav>
+        <div>
+          <Modal>
+            <Modal.Open opens="search">
+              <Button size="verySmall">
+                <IoIosSearch />
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="search">
+              <Search />
+            </Modal.Window>
+          </Modal>
 
-      <UserNav
-        imgUrl={`/users/${currentUser?.photo}`}
-        // name={currentUser?.name}
-        sizes="large"
-      />
+          <DarkModeToogle />
+
+          <Button size="verySmall">
+            <GrNotification />
+          </Button>
+        </div>
+
+        <div>
+          <NavLink to="/account">
+            <UserNav imgUrl={`${currentUser?.photo}`} sizes="large" />
+          </NavLink>
+        </div>
+      </HeaderNav>
     </StyledHeader>
   );
 }
