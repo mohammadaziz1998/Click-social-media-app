@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const { promisify } = require('util');
 const { NONAME } = require('dns');
+const Notification = require('../models/notificationModel');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -38,9 +39,51 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select('+password');
   if (!user || !(await user.correctPassword(password, user.password)))
-    return next(new AppError('Incorrect email or password'));
+    return next(new AppError('Incorrect email or password Please try again'));
 
   createSendToken(user, 200, res);
+});
+
+exports.signup = catchAsync(async (req, res, next) => {
+  const {
+    name,
+    email,
+    birthday: bornIn,
+    gender,
+    password,
+    passwordConfirm,
+  } = req.body;
+
+  if (!name || !email || !bornIn || !password || !passwordConfirm) {
+    console.log('Error in if');
+    return next(
+      new AppError(
+        'Cant create new user, Please Double-check the entered data',
+        403
+      )
+    );
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    bornIn,
+    gender,
+    password,
+    passwordConfirm,
+  });
+  if (!user) return next(new AppError('Cant create user', 403));
+  const notifi = `${user.name.split(' ')[0]} Welcome to Click application`;
+  await Notification.create({
+    user: user._id,
+    notifications: [
+      {
+        text: notifi,
+      },
+    ],
+  });
+
+  createSendToken(user, 201, res);
 });
 
 exports.logout = catchAsync(async (req, res, next) => {

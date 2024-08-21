@@ -3,14 +3,15 @@ import Modal from './Modal';
 import { RiImageEditLine } from 'react-icons/ri';
 import UploadUserPhotoForm from '../features/user/UploadUserPhotoForm';
 
+import AddFriendButton from '../features/notification/AddFriendButton';
+
 const StyledPersonalDiv = styled.div`
-  background-color: var(--color-green-05);
-  margin-inline: 1rem;
-  margin-top: 2rem;
+  /* background-color: var(--color-green-05); */
+  margin: 2rem auto;
+  max-width: 50rem;
   height: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border-radius: 10px;
   div {
     display: flex;
     flex-direction: column;
@@ -23,7 +24,7 @@ const PersonalAccountImg = styled.img`
   max-height: 550px;
 `;
 
-function PersonalAccount({ user, personal = true }) {
+function UserAccount({ user, personal = true }) {
   return (
     <StyledPersonalDiv>
       <div>
@@ -48,10 +49,10 @@ function PersonalAccount({ user, personal = true }) {
         <h4>Personal info</h4>
         <span>{user?.name}</span>
         <span>{user?.age}</span>
-        <span>Mail</span>
+        {!personal && <AddFriendButton />}
       </div>
     </StyledPersonalDiv>
   );
 }
 
-export default PersonalAccount;
+export default UserAccount;

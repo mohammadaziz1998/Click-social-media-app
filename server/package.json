@@ -10,7 +10,7 @@
   "author": "mohamad aziz",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -22,11 +22,15 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
+    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-pre-gyp": "^0.17.0",
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
     "nodemon": "^3.1.0"
   }
 }

@@ -28,6 +28,7 @@ function SidebarLink({ children, name }) {
   const nameUpperCase = `${name[0].toUpperCase()}${name.slice(1)}`;
   return (
     <NavLink
+      className={({ isActive }) => (isActive ? 'active' : '')}
       to={`/${name}`}
       data-tooltip-id={name}
       data-tooltip-content={nameUpperCase}

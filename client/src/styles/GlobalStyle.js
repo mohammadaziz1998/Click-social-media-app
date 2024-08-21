@@ -5,11 +5,15 @@ const GlobalStyle = createGlobalStyle`
 :root{
     
   &,&.light-mode{
-      
-      --color-green-05:#215c64;    
-      --color-green-00: #519589;
-      --color-green-50:#2b747e;
-      
+    .active{
+      background-color:var(--color-hover);
+    }
+    
+    --color-green-05:#215c64;    
+    --color-green-00: #519589;
+    /* --color-green-00:linear-gradient(90deg, rgba(28,53,48,1) 0%, rgba(44,111,99,1) 32%, rgba(81,149,137,1) 54%, rgba(81,149,137,1) 66%, rgba(45,138,122,1) 100%); */
+    --color-green-50:#2b747e;
+    
       --color-green-100: #cdcdcd;
       --color-background:#ffff;
       --color-text:#000;
@@ -19,11 +23,14 @@ const GlobalStyle = createGlobalStyle`
       --image-grayscale: 0;
 --image-opacity: 100%;
       
-      
-    }
-    &.dark-mode{
-      
-      --color-green-05:#277079;
+
+}
+&.dark-mode{
+  
+  .active{
+    background-color: var(--color-hover);
+  }
+  --color-green-05:#277079;
       --color-green-00:#233341;
       --color-green-50:#2b747e;
       --color-green-100:#2d3937;

@@ -2,23 +2,23 @@ import styled from 'styled-components';
 
 import UserNav from './UserNav';
 
-import Search from '../features/user/Search';
-
 import Logo from './Logo';
 
-import { GrNotification } from 'react-icons/gr';
+import { IoIosNotificationsOutline } from 'react-icons/io';
 
-import { IoIosSearch } from 'react-icons/io';
+import { CiSearch } from 'react-icons/ci';
 
 import Button from './Button';
 
 import { useCurrentUser } from '../features/user/useCurrentUser';
 
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import DarkModeToogle from './DarkModeToogle';
-import Modal from './Modal';
+import NotificationBar from '../features/notification/NotificationBar';
+import { useState } from 'react';
 
 const StyledHeader = styled.header`
+  position: relative;
   grid-column: 1/-1;
   display: flex;
   align-items: center;
@@ -46,31 +46,29 @@ const HeaderNav = styled.div`
 
 function Header() {
   const { currentUser } = useCurrentUser();
-
+  const [notification, setNotification] = useState(false);
   return (
     <StyledHeader>
       <Logo />
 
       <HeaderNav>
         <div>
-          <Modal>
-            <Modal.Open opens="search">
-              <Button size="verySmall">
-                <IoIosSearch />
-              </Button>
-            </Modal.Open>
-            <Modal.Window name="search">
-              <Search />
-            </Modal.Window>
-          </Modal>
+          <Link to="search">
+            <Button size="verySmall">
+              <CiSearch />
+            </Button>
+          </Link>
 
           <DarkModeToogle />
 
-          <Button size="verySmall">
-            <GrNotification />
+          <Button
+            onClick={() => setNotification(!notification)}
+            size="verySmall"
+          >
+            <IoIosNotificationsOutline />
           </Button>
         </div>
-
+        {notification && <NotificationBar />}
         <div>
           <NavLink to="/account">
             <UserNav imgUrl={`${currentUser?.photo}`} sizes="large" />

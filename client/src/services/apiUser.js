@@ -18,9 +18,27 @@ export async function login(data) {
       throw new Error('Something went wrong');
     }
     return userData.data;
-  } catch (err) {
-    throw new Error(err.message);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
   }
+}
+
+export async function signup(data) {
+  const response = await axios({
+    method: 'POST',
+    url: `${Base_Url}api/v1/users/signup`,
+    mode: 'cors',
+    withCredentials: true,
+
+    credentials: 'include', // Don't forget to specify this if you need cookies
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data,
+  });
+  console.log(response);
+  return { response };
 }
 
 export async function getCurrentUser() {
@@ -82,7 +100,6 @@ export async function searchFriends(data) {
   const response = await axios(`${Base_Url}api/v1/users/search/${data}`, {
     withCredentials: true,
   });
-  console.log(response);
   return response.data.friends;
 }
 
@@ -101,11 +118,19 @@ export async function autoComplete(data) {
 }
 
 export async function getFriendPage(data) {
-  console.log(data);
   const id = data.queryKey[1];
   const response = await axios(`${Base_Url}api/v1/users/friendpage/${id}`, {
     withCredentials: true,
   });
 
   return response.data.friend;
+}
+
+export async function addFriend(friendId) {
+  const response = await axios({
+    method: 'GET',
+    url: `${Base_Url}api/v1/users/addfreind/${friendId}`,
+    withCredentials: true,
+  });
+  return response;
 }

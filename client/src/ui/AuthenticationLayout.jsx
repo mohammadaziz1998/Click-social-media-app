@@ -7,14 +7,16 @@ const AuthenticationLayout = styled.div`
   width: auto;
   height: auto;
   max-width: 40rem;
-  border-radius: 10px;
+  border-radius: 4px;
+  /* gap: 2rem; */
   h2 {
-    margin-inline: 2rem;
     text-align: center;
+
+    margin: 0 auto;
   }
   a {
     text-align: center;
-    margin: 1rem;
+    margin: 0 1rem;
   }
 `;
 

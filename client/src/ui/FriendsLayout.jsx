@@ -3,7 +3,6 @@ import { useCurrentUser } from '../features/user/useCurrentUser';
 import UserNav from './UserNav';
 import { IoMdMore } from 'react-icons/io';
 import { NavLink } from 'react-router-dom';
-import { useUserID } from '../context/UserIDContext';
 
 const FriendsNav = styled.div`
   margin: 1rem;
@@ -16,13 +15,13 @@ const FriendsNav = styled.div`
 `;
 function FriendsLayout() {
   const { currentUser } = useCurrentUser();
-  const { setId } = useUserID();
+
   return (
     <div>
       {currentUser?.friends.length === 0 && <p>no friends</p>}
       {currentUser?.friends?.map((friend) => (
-        <FriendsNav onClick={() => setId(friend._id)} key={friend._id}>
-          <NavLink to={friend.name}>
+        <FriendsNav key={friend._id}>
+          <NavLink to={friend._id}>
             <UserNav
               imgUrl={`${friend.photo}`}
               sizes="large"

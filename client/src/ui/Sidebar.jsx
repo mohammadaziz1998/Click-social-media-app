@@ -13,6 +13,7 @@ import ConfirmLogout from '../features/authentication/ConfirmLogout';
 export const StyledSidebarLink = styled.aside`
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   justify-content: flex-start;
   padding: 1rem;
   row-gap: 1rem;

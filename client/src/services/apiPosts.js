@@ -17,15 +17,23 @@ export async function getPosts() {
   }
 }
 export async function createPost(data) {
+  const { text, photo } = data;
+  const formData = new FormData();
+  formData.append('image', photo);
+  formData.append('text', text);
   try {
     const response = await axios({
       url: `${Base_Url}api/v1/posts/newpost`,
       method: 'POST',
       withCredentials: true,
-      data,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return response;
   } catch (err) {
+    console.log(err);
     throw new Error(err.message);
   }
 }

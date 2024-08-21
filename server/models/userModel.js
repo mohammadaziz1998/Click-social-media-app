@@ -1,6 +1,8 @@
-const { default: mongoose } = require('mongoose');
+/* eslint no-use-before-define: 0 */
+
+const mongoose = require('mongoose');
 const validator = require('validator');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { differenceInYears } = require('date-fns');
 
 const userSchema = new mongoose.Schema({
@@ -20,6 +22,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['authenticated', 'notAuthenticated'] },
   photo: { type: String, default: 'default.jpg' },
   // birthday: { type: Date, required: [true, 'Please provide your birthday'] },
+
+  gender: { type: String, enum: ['male', 'female', 'other'] },
   password: {
     type: String,
     required: [true, 'Please provide a password'],

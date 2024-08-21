@@ -39,7 +39,7 @@ const StyledUserNav = styled.div`
     width: 10px;
     height: 10px;
     position: absolute;
-    z-index: 1000;
+    z-index: 3;
   }
 `;
 const Img = styled.img`

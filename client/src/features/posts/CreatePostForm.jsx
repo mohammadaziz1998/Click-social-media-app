@@ -26,7 +26,7 @@ function CreatePostForm({ setIsPost }) {
   );
   return (
     <BaseFormLayout>
-      <form>
+      <form encType="multipart/form-data">
         <FormField type="post">
           <label>Whats on your mind</label>
           <input

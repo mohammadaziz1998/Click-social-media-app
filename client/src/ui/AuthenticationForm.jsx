@@ -1,19 +1,24 @@
 import styled from 'styled-components';
 
 const AuthenticationForm = styled.form`
-  padding-top: 2rem;
-  padding-left: 1rem;
-
   display: flex;
   flex-direction: column;
 
-  input {
-    height: 2rem;
-    margin-right: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+  input,
+  select {
+    height: 2.3rem;
+    width: 100%;
+    border-radius: 4px;
     border: none;
+    outline-color: var(--color-green-100);
   }
+  input:valid {
+    outline-color: #0a9500;
+  }
+  input:invalid {
+    outline-color: #ff0000;
+  }
+
   label {
     margin-top: 1rem;
   }

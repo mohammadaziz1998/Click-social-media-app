@@ -5,27 +5,31 @@ import styled from 'styled-components';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 
 const StyledBaseModal = styled.div`
+  margin: 0;
+  padding: 0;
   overflow-y: scroll;
   width: 100%;
   max-height: 90vh;
+  scrollbar-gutter: stable both-edges;
+
   &::-webkit-scrollbar {
     -webkit-appearance: none;
   }
 `;
 
 const StyledModal = styled.div`
+  background-color: var(--color-green-100);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--color-green-100);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   padding: 3rem 3.8rem;
 
   transition: all 0.5s;
   width: 70%;
-  border-radius: 10px;
+  border-radius: 4px;
 
   @media (max-width: 600px) {
     width: 95%;
@@ -62,8 +66,8 @@ const Button = styled.button`
   }
 
   & svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    /* width: 2.4rem;
+    height: 2.4rem; */
     /* Sometimes we need both */
     /* fill: var(--color-grey-500);
     stroke: var(--color-grey-500); */

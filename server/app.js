@@ -3,12 +3,14 @@ dotenv.config({ path: './config.env' });
 const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
 const commentRouter = require('./routes/commentRouter');
+const notificationRouter = require('./routes/notificationRouter');
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const session = require('express-session');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 //////////
@@ -24,6 +26,9 @@ app.use(
 
 // app.use(cors());
 app.options('*', cors());
+
+app.use(morgan('dev'));
+
 /////////////
 
 ////////////////////////////// /
@@ -47,6 +52,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/notification', notificationRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 

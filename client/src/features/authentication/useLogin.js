@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 export function useLogin() {
-  // const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { isPending, mutate: login } = useMutation({
     mutationFn: (data) => loginAPI(data),
@@ -15,7 +14,7 @@ export function useLogin() {
     },
     onError: (err) => {
       console.log(err);
-      toast.error('Incorrect email or password');
+      toast.error(err.message);
     },
   });
   return { login, isPending };

@@ -6,6 +6,11 @@ const StyledMain = styled.main`
   &::-webkit-scrollbar {
     -webkit-appearance: none;
   }
+
+  /* padding-inline: 5rem;
+  @media (max-width: 600px) {
+    padding-inline: 0;
+  } */
 `;
 
 function Main({ children }) {

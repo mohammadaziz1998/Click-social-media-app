@@ -4,8 +4,7 @@ const StyledErrorParagraph = styled.p`
   color: red;
   position: relative;
   font-size: 1rem;
-  /* margin-top: -10px; */
-  margin-top: -1rem;
+  margin: 0;
 `;
 
 function ErrorFormMessage({ children }) {

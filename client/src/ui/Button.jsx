@@ -10,6 +10,7 @@ const sizes = {
     height: 3rem;
     padding: 0.2rem 0.2rem;
     text-align: center;
+    white-space: nowrap;
   `,
   fit: css`
     background-color: transparent;
@@ -23,7 +24,7 @@ const sizes = {
   `,
   small: css`
     font-size: 1.2rem;
-    width: 7rem;
+    min-width: 7rem;
     height: 3rem;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
@@ -36,6 +37,9 @@ const sizes = {
     font-weight: 500;
   `,
   large: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.6rem;
     padding: 0.5rem 1rem;
     font-weight: 500;
@@ -51,6 +55,7 @@ const Button = styled.button`
   box-shadow: var(--shadow-sm);
   border: none;
   cursor: pointer;
+
   ${(props) => sizes[props.size]};
 `;
 

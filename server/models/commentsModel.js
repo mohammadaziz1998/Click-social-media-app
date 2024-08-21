@@ -17,7 +17,7 @@ const commentsSchema = new mongoose.Schema({
         ref: 'User',
         // required: [true, 'comment must belong to a user'],
       },
-      createdAt: { type: Date, default: Date.now() },
+      createdAt: { type: Date, default: new Date() },
     }),
   ],
 });

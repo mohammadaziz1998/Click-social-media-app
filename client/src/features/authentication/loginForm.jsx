@@ -23,13 +23,16 @@ function LoginForm() {
       <input
         type="text"
         id="email"
+        required
         {...register('email', { required: 'Please prvide your email' })}
       />
       <ErrorFormMessage>{errors.email?.message}</ErrorFormMessage>
+
       <label htmlFor="password">Password</label>
       <input
         type="password"
         id="password"
+        required
         {...register('password', {
           required: 'Please provide your password',
           minLength: {
@@ -39,6 +42,7 @@ function LoginForm() {
         })}
       />
       <ErrorFormMessage>{errors.password?.message}</ErrorFormMessage>
+
       <Button size="small">{isPending ? <SpinnerMini /> : 'Login'}</Button>
     </AuthenticationForm>
   );

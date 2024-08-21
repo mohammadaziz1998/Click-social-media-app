@@ -1,3 +1,4 @@
+const Notification = require('../models/notificationModel');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -128,4 +129,17 @@ exports.getFrienPage = catchAsync(async (req, res, next) => {
   const friend = await User.findById(id);
   if (!friend) return next(new AppError('There is no user with id'));
   res.status(200).json({ status: 'success', friend });
+});
+
+exports.addFriend = catchAsync(async (req, res, next) => {
+  const { friendid } = req.params;
+  const notifi = `You have a friend request from ${req.user.name}`;
+
+  const notification = await Notification.findOneAndUpdate(
+    { user: friendid },
+    { $push: { notifications: { text: notifi } } }
+  );
+  console.log(notification);
+  if (!notification) return next(new AppError('There is no user with id'));
+  res.status(200).json({ status: 'success' });
 });
