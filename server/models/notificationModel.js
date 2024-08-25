@@ -11,12 +11,17 @@ const notificationSchema = new mongoose.Schema({
         type: Date,
         default: new Date(),
       },
+      notificationFrom: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        // required: [true, 'notification must come from user'],
+      },
+      read: {
+        type: Boolean,
+        default: false,
+      },
     }),
   ],
-  read: {
-    type: Boolean,
-    default: false,
-  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',

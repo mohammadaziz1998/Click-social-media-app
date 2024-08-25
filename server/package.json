@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "SET NODE_ENV=development && nodemon server"
+    "dev": "SET NODE_ENV=development && nodemon server",
+    "prod": "SET NODE_ENV='production' && nodemon server"
   },
   "author": "mohamad aziz",
   "license": "ISC",

@@ -6,6 +6,7 @@ const AuthenticationForm = styled.form`
 
   input,
   select {
+    color: var(--color-input-text);
     height: 2.3rem;
     width: 100%;
     border-radius: 4px;

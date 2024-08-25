@@ -19,26 +19,31 @@ export async function login(data) {
     }
     return userData.data;
   } catch (error) {
-    console.log(error);
-    throw new Error(error);
+    // console.log(error);
+    throw new Error(error.response.data.message);
   }
 }
 
 export async function signup(data) {
-  const response = await axios({
-    method: 'POST',
-    url: `${Base_Url}api/v1/users/signup`,
-    mode: 'cors',
-    withCredentials: true,
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: `${Base_Url}api/v1/users/signup`,
+      mode: 'cors',
+      withCredentials: true,
 
-    credentials: 'include', // Don't forget to specify this if you need cookies
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data,
-  });
-  console.log(response);
-  return { response };
+      credentials: 'include', // Don't forget to specify this if you need cookies
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data,
+    });
+    console.log(response);
+    return { response };
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function getCurrentUser() {
@@ -53,19 +58,23 @@ export async function getCurrentUser() {
   }
 }
 export async function updateUserPhoto(data) {
-  const formData = new FormData();
-  formData.append('image', data);
-  const response = await axios({
-    method: 'PATCH',
-    url: `${Base_Url}api/v1/users/uploadphoto`,
-    data: formData,
+  try {
+    const formData = new FormData();
+    formData.append('image', data);
+    const response = await axios({
+      method: 'PATCH',
+      url: `${Base_Url}api/v1/users/uploadphoto`,
+      data: formData,
 
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return response;
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 export async function logout() {

@@ -6,7 +6,6 @@ export function useNotification(friendId) {
     queryKey: ['notification'],
     queryFn: () => getNotificationApi(),
   });
-  console.log(data);
-  const notification = data?.data?.data;
-  return { notification, isLoading };
+  const notifications = data?.data?.data;
+  return { notifications, isLoading };
 }

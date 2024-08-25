@@ -7,16 +7,21 @@ const GlobalStyle = createGlobalStyle`
   &,&.light-mode{
     .active{
       background-color:var(--color-hover);
+    
+
     }
     
     --color-green-05:#215c64;    
     --color-green-00: #519589;
+    --color-green-00-noti: #3b6d64;
     /* --color-green-00:linear-gradient(90deg, rgba(28,53,48,1) 0%, rgba(44,111,99,1) 32%, rgba(81,149,137,1) 54%, rgba(81,149,137,1) 66%, rgba(45,138,122,1) 100%); */
     --color-green-50:#2b747e;
     
       --color-green-100: #cdcdcd;
+      --color-green-200: #cdcdcd;
       --color-background:#ffff;
       --color-text:#000;
+      --color-input-text:#044965;
       --color-hover: #aab3ad;
 
 
@@ -27,15 +32,18 @@ const GlobalStyle = createGlobalStyle`
 }
 &.dark-mode{
   
-  .active{
+  .sidebar-link-active{
     background-color: var(--color-hover);
   }
   --color-green-05:#277079;
       --color-green-00:#233341;
+      --color-green-00-noti:#1d2b36;
       --color-green-50:#2b747e;
       --color-green-100:#2d3937;
       --color-background:#000;
-      --color-text:#8abdc3;
+      /* --color-text:#8abdc3; */
+      --color-text:#d6f4ff;
+      --color-input-text:#022330;
       --color-hover: #aab3ad;
 
 

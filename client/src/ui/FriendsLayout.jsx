@@ -1,37 +1,35 @@
 import styled from 'styled-components';
-import { useCurrentUser } from '../features/user/useCurrentUser';
-import UserNav from './UserNav';
-import { IoMdMore } from 'react-icons/io';
-import { NavLink } from 'react-router-dom';
 
-const FriendsNav = styled.div`
-  margin: 1rem;
-  border-radius: 10px;
-  background-color: var(--color-green-00);
+import { Link, NavLink, Outlet } from 'react-router-dom';
+
+const StyledFriendLayout = styled.div``;
+
+const StyledFriendLayoutNav = styled.div`
+  padding: 0.3rem;
+  margin: 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-inline: 0.7rem;
+  justify-content: center;
+  a {
+    padding-inline: 1rem;
+    margin-inline: clamp(0.2rem, 1vw, 2rem);
+    border-radius: 4px;
+    background-color: var(--color-green-05);
+    color: var(--color-text);
+  }
 `;
-function FriendsLayout() {
-  const { currentUser } = useCurrentUser();
 
+function FriendsLayout() {
   return (
-    <div>
-      {currentUser?.friends.length === 0 && <p>no friends</p>}
-      {currentUser?.friends?.map((friend) => (
-        <FriendsNav key={friend._id}>
-          <NavLink to={friend._id}>
-            <UserNav
-              imgUrl={`${friend.photo}`}
-              sizes="large"
-              name={friend.name}
-            />
-          </NavLink>
-          <IoMdMore />
-        </FriendsNav>
-      ))}
-    </div>
+    <StyledFriendLayout>
+      <StyledFriendLayoutNav>
+        <NavLink to="allfriends">All Friends</NavLink>
+        <NavLink to="friendrequest">Friend Request</NavLink>
+      </StyledFriendLayoutNav>
+      <div>
+        <Outlet />
+      </div>
+    </StyledFriendLayout>
   );
 }
 

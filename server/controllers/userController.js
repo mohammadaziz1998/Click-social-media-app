@@ -132,14 +132,16 @@ exports.getFrienPage = catchAsync(async (req, res, next) => {
 });
 
 exports.addFriend = catchAsync(async (req, res, next) => {
+  const { _id, name } = req.user;
   const { friendid } = req.params;
-  const notifi = `You have a friend request from ${req.user.name}`;
+  const notifi = `You have a friend request from ${name}`;
 
   const notification = await Notification.findOneAndUpdate(
     { user: friendid },
-    { $push: { notifications: { text: notifi } } }
+    { $push: { notifications: { text: notifi, notificationFrom: _id } } }
   );
   console.log(notification);
-  if (!notification) return next(new AppError('There is no user with id'));
+  if (!notification)
+    return next(new AppError('There is no notification with id'));
   res.status(200).json({ status: 'success' });
 });

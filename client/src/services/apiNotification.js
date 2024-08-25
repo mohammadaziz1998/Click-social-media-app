@@ -7,6 +7,5 @@ export async function getNotification() {
     url: `${Base_Url}api/v1/notification`,
     withCredentials: true,
   });
-  console.log(response);
   return response;
 }

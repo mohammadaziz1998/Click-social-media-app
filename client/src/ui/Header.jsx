@@ -16,6 +16,7 @@ import { Link, NavLink } from 'react-router-dom';
 import DarkModeToogle from './DarkModeToogle';
 import NotificationBar from '../features/notification/NotificationBar';
 import { useState } from 'react';
+import { useNotification } from '../features/notification/useNotification';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -47,6 +48,7 @@ const HeaderNav = styled.div`
 function Header() {
   const { currentUser } = useCurrentUser();
   const [notification, setNotification] = useState(false);
+  const { notifications } = useNotification();
   return (
     <StyledHeader>
       <Logo />

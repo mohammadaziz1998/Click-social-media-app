@@ -16,6 +16,8 @@ import { DarkModeProvider } from './context/DarkModeContext';
 import Friend from './pages/Friend';
 import { UserIDProvider } from './context/UserIDContext';
 import Search from './features/user/SearchEngin';
+import AllMyFriends from './ui/AllMyFriends';
+import FriendRequest from './features/notification/FriendRequest';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,9 +46,13 @@ function App() {
                 <Route path="home" element={<Home />} />
                 <Route path="account" element={<Account />} />
                 <Route path="settings" element={<Settings />} />
-                <Route path="friends" element={<Friends />} />
                 <Route path="search" element={<Search />} />
                 <Route path="friends/:friendId" element={<Friend />} />
+                <Route path="friends" element={<Friends />}>
+                  <Route index element={<Navigate replace to="allfriends" />} />
+                  <Route path="allfriends" element={<AllMyFriends />} />
+                  <Route path="friendrequest" element={<FriendRequest />} />
+                </Route>
               </Route>
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />

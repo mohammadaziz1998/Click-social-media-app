@@ -55,7 +55,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   } = req.body;
 
   if (!name || !email || !bornIn || !password || !passwordConfirm) {
-    console.log('Error in if');
     return next(
       new AppError(
         'Cant create new user, Please Double-check the entered data',

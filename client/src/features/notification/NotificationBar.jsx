@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useNotification } from './useNotification';
 import SpinnerMini from '../../ui/SpinnerMini';
+import UserNotification from '../../ui/UserNotification';
 
 const StyledNotificationdiv = styled.div`
   position: absolute;
@@ -8,21 +9,31 @@ const StyledNotificationdiv = styled.div`
   right: 130px;
   width: min(70%, 430px);
   height: 600px;
-  background-color: var(--color-green-05);
+  background-color: var(--color-green-00);
   z-index: 4;
   border-radius: 4px;
 `;
 
+const StyledNotification = styled.div`
+  font-size: clamp(15px, 1.5vw, 22px);
+  padding: 1rem 0;
+  border-bottom: 2px solid var(--color-green-00);
+  box-shadow: 1px 1px 1px 1px var(--color-green-100);
+  background-color: ${(props) =>
+    props.read ? 'var(--color-green-00)' : 'var(--color-green-00-noti)'};
+`;
+
 function NotificationBar() {
-  const { notification, isLoading } = useNotification();
-  console.log('notification', notification);
+  const { notifications, isLoading } = useNotification();
   return (
     <StyledNotificationdiv>
       {isLoading ? (
         <SpinnerMini />
       ) : (
-        notification?.notifications?.map((notifi) => (
-          <div key={notifi._id}>{notifi.text}</div>
+        notifications?.notifications?.map((notifi) => (
+          <StyledNotification read={notifi.read} key={notifi._id}>
+            <UserNotification request={notifi}>{notifi?.text}</UserNotification>
+          </StyledNotification>
         ))
       )}
     </StyledNotificationdiv>
