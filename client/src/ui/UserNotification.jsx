@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 const StyledUserNotification = styled.div`
   display: flex;
@@ -24,21 +25,20 @@ const StyledUserNotificationDiv = styled.div`
   flex-direction: column;
 `;
 
-function UserNotification({ children, request }) {
+function UserNotification({ children, photo, name, date }) {
   return (
+    // <Link to="/friends/friendrequest">
     <StyledUserNotification>
-      <img
-        src={`/images/profile/${request?.notificationFrom?.photo}`}
-        alt={`${request?.notificationFrom?.name}`}
-      />
+      <img src={`/images/profile/${photo}`} alt={`${name}`} />
       <StyledUserNotificationDiv>
         <StyledUserNotificationName>
-          <strong>{request?.notificationFrom?.name}</strong>
-          <span>{formatDistanceToNow(request.date)}</span>
+          <strong>{name}</strong>
+          <span>{formatDistanceToNow(date)}</span>
         </StyledUserNotificationName>
         <div>{children}</div>
       </StyledUserNotificationDiv>
     </StyledUserNotification>
+    // </Link>
   );
 }
 

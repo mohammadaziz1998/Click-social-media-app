@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const Notification = require('../models/notificationModel');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
@@ -125,7 +126,7 @@ exports.autoComplete = catchAsync(async (req, res, next) => {
 
 exports.getFrienPage = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  console.log(req.params);
+
   const friend = await User.findById(id);
   if (!friend) return next(new AppError('There is no user with id'));
   res.status(200).json({ status: 'success', friend });
@@ -136,12 +137,152 @@ exports.addFriend = catchAsync(async (req, res, next) => {
   const { friendid } = req.params;
   const notifi = `You have a friend request from ${name}`;
 
+  const user = await User.findByIdAndUpdate(friendid, {
+    $push: { friendRequest: { fromUser: _id } },
+  });
+  if (!user) return next(new AppError('Cant register friend request', 403));
+
   const notification = await Notification.findOneAndUpdate(
     { user: friendid },
     { $push: { notifications: { text: notifi, notificationFrom: _id } } }
   );
-  console.log(notification);
+  // console.log(notification);
   if (!notification)
     return next(new AppError('There is no notification with id'));
   res.status(200).json({ status: 'success' });
+});
+
+exports.isMyFriend = catchAsync(async (req, res, next) => {
+  const userId = req.user._id;
+
+  const { friendid } = req.params;
+  const user = await User.aggregate([
+    {
+      $match: { _id: new mongoose.Types.ObjectId(`${friendid}`) },
+    },
+    {
+      $match: {
+        'friendRequest.fromUser': {
+          $in: [userId],
+        },
+      },
+    },
+    {
+      $count: 'user',
+    },
+  ]);
+  const data =
+    user.length === 0 ? 'has not send friend request' : 'send friend request';
+  res.status(200).json({
+    status: 'success',
+    data,
+  });
+});
+
+exports.friendRequestAnswer = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const { answer, id: userId } = req.body;
+    const { _id: userAcceptId } = req.user;
+    console.log(userId, userAcceptId, answer);
+    if (answer === 'accept') {
+      const userAccepte = await User.findByIdAndUpdate(
+        userAcceptId,
+        {
+          $addToSet: { friends: userId },
+        },
+        { session }
+      );
+      await User.updateOne(
+        {
+          _id: userAcceptId,
+          'friendRequest.fromUser': new mongoose.Types.ObjectId(`${userId}`),
+        },
+        { $set: { 'friendRequest.$.status': 'accept' } },
+        { session }
+      );
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {
+          $addToSet: { friends: userAcceptId },
+        },
+        { session }
+      );
+      await Notification.findOneAndUpdate(
+        { user: userId },
+        {
+          $push: {
+            notifications: {
+              text: `You are now Friend with ${userAccepte.name}`,
+              notificationFrom: userAcceptId,
+            },
+          },
+        }
+      );
+      await Notification.findOneAndUpdate(
+        { user: userAcceptId },
+        {
+          $push: {
+            notifications: {
+              text: `You are now Friend with ${user.name}`,
+              notificationFrom: userAcceptId,
+            },
+          },
+        }
+      );
+    }
+
+    if (answer === 'decline') {
+      const userAccepte = await User.findById(userAcceptId, { session });
+      await User.updateOne(
+        {
+          _id: userAcceptId,
+          'friendRequest.fromUser': new mongoose.Types.ObjectId(`${userId}`),
+        },
+        { $set: { 'friendRequest.$.status': 'reject' } },
+        { session }
+      );
+      await Notification.findOneAndUpdate(
+        { user: userId },
+        {
+          $push: {
+            notifications: {
+              text: `${userAccepte.name} decline your friend request`,
+              notificationFrom: userAcceptId,
+            },
+          },
+        }
+      );
+    }
+    await session.commitTransaction();
+    return res.status(200).json({
+      status: 'success',
+    });
+  } catch (error) {
+    console.log('An error occurred during the transaction:' + error);
+
+    await session.abortTransaction();
+  } finally {
+    await session.endSession();
+  }
+};
+
+exports.friendRequest = catchAsync(async (req, res, next) => {
+  const requests = await User.findById(req.user._id)
+    .populate({
+      path: 'friendRequest',
+      populate: {
+        path: 'fromUser',
+        select: ['_id', 'name', 'photo', 'active'],
+      },
+    })
+    .select('friendRequest');
+
+  if (!requests) return next(new AppError('You have no freinds yet', 404));
+
+  res.status(200).json({
+    status: 'success',
+    data: requests,
+  });
 });

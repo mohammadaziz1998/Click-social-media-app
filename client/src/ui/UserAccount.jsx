@@ -3,7 +3,7 @@ import Modal from './Modal';
 import { RiImageEditLine } from 'react-icons/ri';
 import UploadUserPhotoForm from '../features/user/UploadUserPhotoForm';
 
-import AddFriendButton from '../features/notification/AddFriendButton';
+import AddFriendButton from '../features/friendship/AddFriendButton';
 
 const StyledPersonalDiv = styled.div`
   /* background-color: var(--color-green-05); */

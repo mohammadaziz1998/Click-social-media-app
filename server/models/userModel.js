@@ -48,6 +48,26 @@ const userSchema = new mongoose.Schema({
   posts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }],
   passwordChangedAt: Date,
   history: [String],
+  friendRequest: [
+    new mongoose.Schema({
+      fromUser: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+      date: { type: Date, default: new Date() },
+      status: {
+        type: String,
+        enum: ['notAnswer', 'accept', 'reject'],
+        default: 'notAnswer',
+      },
+    }),
+  ],
+  friendReject: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    },
+  ],
 });
 userSchema.pre('save', function (next) {
   console.log('pre');

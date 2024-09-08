@@ -25,14 +25,21 @@ const StyledNotification = styled.div`
 
 function NotificationBar() {
   const { notifications, isLoading } = useNotification();
+  console.log(notifications);
   return (
     <StyledNotificationdiv>
       {isLoading ? (
         <SpinnerMini />
       ) : (
-        notifications?.notifications?.map((notifi) => (
+        notifications?.map((notifi) => (
           <StyledNotification read={notifi.read} key={notifi._id}>
-            <UserNotification request={notifi}>{notifi?.text}</UserNotification>
+            <UserNotification
+              photo={notifi?.notificationFrom?.photo}
+              name={notifi?.notificationFrom?.name}
+              date={notifi?.date}
+            >
+              {notifi?.text}
+            </UserNotification>
           </StyledNotification>
         ))
       )}

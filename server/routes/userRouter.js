@@ -70,5 +70,20 @@ router.get(
   authController.protect,
   userController.addFriend
 );
+router.get(
+  '/isfriend/:friendid',
+  authController.protect,
+  userController.isMyFriend
+);
+router.post(
+  '/handlefriendrequest',
+  authController.protect,
+  userController.friendRequestAnswer
+);
+router.get(
+  '/friendrequests',
+  authController.protect,
+  userController.friendRequest
+);
 
 module.exports = router;

@@ -17,7 +17,7 @@ import Friend from './pages/Friend';
 import { UserIDProvider } from './context/UserIDContext';
 import Search from './features/user/SearchEngin';
 import AllMyFriends from './ui/AllMyFriends';
-import FriendRequest from './features/notification/FriendRequest';
+import FriendRequest from './features/friendship/FriendRequest';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,9 +28,9 @@ const queryClient = new QueryClient({
 });
 function App() {
   return (
-    <DarkModeProvider>
-      <UserIDProvider>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <DarkModeProvider>
+        <UserIDProvider>
           <ReactQueryDevtools initialIsOpen={false} />
           <GlobalStyle />
           <BrowserRouter>
@@ -78,9 +78,9 @@ function App() {
               },
             }}
           />
-        </QueryClientProvider>
-      </UserIDProvider>
-    </DarkModeProvider>
+        </UserIDProvider>
+      </DarkModeProvider>
+    </QueryClientProvider>
   );
 }
 
