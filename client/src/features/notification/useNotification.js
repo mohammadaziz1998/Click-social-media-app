@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNotification as getNotificationApi } from '../../services/apiNotification';
 
-export function useNotification(friendId) {
+export function useNotification() {
   const { data, isLoading } = useQuery({
     queryKey: ['notification'],
     queryFn: () => getNotificationApi(),

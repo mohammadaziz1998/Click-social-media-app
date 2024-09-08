@@ -25,7 +25,6 @@ const StyledNotification = styled.div`
 
 function NotificationBar() {
   const { notifications, isLoading } = useNotification();
-  console.log(notifications);
   return (
     <StyledNotificationdiv>
       {isLoading ? (

@@ -158,21 +158,46 @@ exports.isMyFriend = catchAsync(async (req, res, next) => {
   const { friendid } = req.params;
   const user = await User.aggregate([
     {
-      $match: { _id: new mongoose.Types.ObjectId(`${friendid}`) },
-    },
-    {
-      $match: {
-        'friendRequest.fromUser': {
-          $in: [userId],
-        },
+      $facet: {
+        isSendFriendRequest: [
+          {
+            $match: { _id: new mongoose.Types.ObjectId(`${friendid}`) },
+          },
+
+          {
+            $match: {
+              'friendRequest.fromUser': {
+                $in: [userId],
+              },
+            },
+          },
+          {
+            $count: 'user',
+          },
+        ],
+        isYourFriend: [
+          {
+            $match: { _id: new mongoose.Types.ObjectId(`${friendid}`) },
+          },
+          {
+            $match: {
+              friends: {
+                $in: [userId],
+              },
+            },
+          },
+          { $count: 'user' },
+        ],
       },
     },
-    {
-      $count: 'user',
-    },
   ]);
+  const { isSendFriendRequest, isYourFriend } = user[0];
   const data =
-    user.length === 0 ? 'has not send friend request' : 'send friend request';
+    isYourFriend.length > 0
+      ? 'your friend'
+      : isSendFriendRequest.length === 0
+      ? 'has not send friend request'
+      : 'send friend request';
   res.status(200).json({
     status: 'success',
     data,

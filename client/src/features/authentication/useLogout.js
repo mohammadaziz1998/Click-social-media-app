@@ -1,13 +1,16 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logout as logoutApi } from '../../services/apiUser';
 import { useNavigate } from 'react-router-dom';
 
 export function useLogout() {
-  console.log('mutation');
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate: logout, isPending } = useMutation({
     mutationFn: logoutApi,
-    onSuccess: () => navigate('/login'),
+    onSuccess: () => {
+      navigate('/login');
+      queryClient.removeQueries();
+    },
   });
   return { logout, isPending };
 }

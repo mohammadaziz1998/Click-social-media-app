@@ -4,6 +4,7 @@ import Button from '../../ui/Button';
 import UserNotification from '../../ui/UserNotification';
 import { useFriendRequestAnswer } from './useFriendRequestAnswer';
 import { useGetFriendRequest } from './useGetFriendRequests';
+import SpinnerMini from '../../ui/SpinnerMini';
 const StyledFriendRequest = styled.div`
   margin-inline: auto;
   max-width: 40rem;
@@ -23,48 +24,52 @@ const StyledFriendRequestButtons = styled.div`
 function FriendRequest() {
   const { friendRequest, isLoading } = useGetFriendRequest();
   const { friendRequestAnswer, isPending } = useFriendRequestAnswer();
-  console.log(friendRequest);
 
   function handleFriendRequestAnswer(e, id) {
-    console.log(e.target.value, id);
     friendRequestAnswer({ answer: e.target.value, id });
   }
   return (
     <StyledFriendRequest>
       {friendRequest?.length === 0
         ? 'You have no friend request'
-        : friendRequest?.map((request) => (
-            <StyledFriendRequestNav key={request._id}>
-              <UserNotification
-                photo={request?.fromUser?.photo}
-                name={request?.fromUser?.name}
-                date={request?.date}
-              >
-                <StyledFriendRequestButtons>
-                  <Button
-                    value="accept"
-                    size="small"
-                    onClick={(e) =>
-                      handleFriendRequestAnswer(e, request.fromUser._id)
-                    }
-                    disabled={isPending}
-                  >
-                    Accept
-                  </Button>
-                  <Button
-                    value="decline"
-                    size="small"
-                    onClick={(e) =>
-                      handleFriendRequestAnswer(e, request.fromUser._id)
-                    }
-                    disabled={isPending}
-                  >
-                    Decline
-                  </Button>
-                </StyledFriendRequestButtons>
-              </UserNotification>
-            </StyledFriendRequestNav>
-          ))}
+        : friendRequest
+            ?.filter((request) => request.status === 'notAnswer')
+            .map((request) => (
+              <StyledFriendRequestNav key={request._id}>
+                <UserNotification
+                  photo={request?.fromUser?.photo}
+                  name={request?.fromUser?.name}
+                  date={request?.date}
+                >
+                  {isPending ? (
+                    <SpinnerMini />
+                  ) : (
+                    <StyledFriendRequestButtons>
+                      <Button
+                        value="accept"
+                        size="small"
+                        onClick={(e) =>
+                          handleFriendRequestAnswer(e, request.fromUser._id)
+                        }
+                        disabled={isPending}
+                      >
+                        Accept
+                      </Button>
+                      <Button
+                        value="decline"
+                        size="small"
+                        onClick={(e) =>
+                          handleFriendRequestAnswer(e, request.fromUser._id)
+                        }
+                        disabled={isPending}
+                      >
+                        Decline
+                      </Button>
+                    </StyledFriendRequestButtons>
+                  )}
+                </UserNotification>
+              </StyledFriendRequestNav>
+            ))}
     </StyledFriendRequest>
   );
 }

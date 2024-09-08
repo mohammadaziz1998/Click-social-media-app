@@ -4,6 +4,8 @@ import { RiImageEditLine } from 'react-icons/ri';
 import UploadUserPhotoForm from '../features/user/UploadUserPhotoForm';
 
 import AddFriendButton from '../features/friendship/AddFriendButton';
+import { useIsMyFriend } from '../features/friendship/useIsMyFriend';
+import { useParams } from 'react-router-dom';
 
 const StyledPersonalDiv = styled.div`
   /* background-color: var(--color-green-05); */
@@ -25,6 +27,8 @@ const PersonalAccountImg = styled.img`
 `;
 
 function UserAccount({ user, personal = true }) {
+  const { friendId } = useParams();
+  const { isMyFriend } = useIsMyFriend(friendId);
   return (
     <StyledPersonalDiv>
       <div>
@@ -49,7 +53,7 @@ function UserAccount({ user, personal = true }) {
         <h4>Personal info</h4>
         <span>{user?.name}</span>
         <span>{user?.age}</span>
-        {!personal && <AddFriendButton />}
+        {!personal && isMyFriend !== 'your friend' && <AddFriendButton />}
       </div>
     </StyledPersonalDiv>
   );

@@ -31,7 +31,7 @@ function AllMyFriends() {
       )}
       {currentUser?.friends?.map((friend) => (
         <StyledAllFriendsNav key={friend._id}>
-          <NavLink to={friend._id}>
+          <NavLink to={`/friends/${friend._id}`}>
             <UserNav
               imgUrl={`${friend.photo}`}
               sizes="large"
