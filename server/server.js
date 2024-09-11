@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const app = require('./app');
+const app = require('./index');
 
 const connection = mongoose
   .connect(process.env.DATABASE, {
