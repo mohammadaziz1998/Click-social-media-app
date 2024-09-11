@@ -3,6 +3,7 @@ const authController = require('../controllers/authController');
 const express = require('express');
 const router = express.Router();
 const photoUpload = require('../utils/photoUpload');
+const handleImage = require('../utils/handleImage');
 
 // const multer = require('multer');
 
@@ -37,6 +38,7 @@ router.patch(
   authController.protect,
   // upload.single('image'),
   photoUpload('profile').single('image'),
+  // handleImage,
   userController.uploadPhoto
 );
 router.post('/', userController.createUsers);

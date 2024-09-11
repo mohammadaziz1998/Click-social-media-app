@@ -7,7 +7,7 @@ export function useUpdateUserPhoto() {
   const navigate = useNavigate();
   const { mutate: updateUserPhoto } = useMutation({
     mutationFn: (data) => updateUserPhotoApi(data),
-    onSuccess: (updtedUser) => {
+    onSuccess: () => {
       querClient.invalidateQueries(['user']);
       navigate(-1);
     },

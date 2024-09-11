@@ -1,9 +1,9 @@
-import { Base_Url } from './apiPosts';
 import axios from 'axios';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 export async function commentOnPost(data) {
   const comment = await axios({
-    url: `${Base_Url}api/v1/comments/comment/${data.postId}`,
+    url: `${Base_Url}/api/v1/comments/comment/${data.postId}`,
     method: 'POST',
     withCredentials: true,
     credentials: 'include',
@@ -15,7 +15,7 @@ export async function commentOnPost(data) {
 
 export async function getPostComments(postId) {
   const postID = postId.queryKey[1];
-  const response = await axios(`${Base_Url}api/v1/comments/${postID}`, {
+  const response = await axios(`${Base_Url}/api/v1/comments/${postID}`, {
     withCredentials: true,
 
     credentials: 'include',

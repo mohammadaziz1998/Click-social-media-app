@@ -1,9 +1,8 @@
 import axios from 'axios';
-export const Base_Url = 'http://127.0.0.1:8000/';
-
+const Base_Url = import.meta.env.VITE_API_URL;
 export async function getPosts() {
   try {
-    const response = await axios.get(`${Base_Url}api/v1/posts`, {
+    const response = await axios.get(`${Base_Url}/api/v1/posts`, {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +22,7 @@ export async function createPost(data) {
   formData.append('text', text);
   try {
     const response = await axios({
-      url: `${Base_Url}api/v1/posts/newpost`,
+      url: `${Base_Url}/api/v1/posts/newpost`,
       method: 'POST',
       withCredentials: true,
       data: formData,

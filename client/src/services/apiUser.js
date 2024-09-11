@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Base_Url } from './apiPosts';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 export async function login(data) {
   try {
-    const userData = await axios(`${Base_Url}api/v1/users/login`, {
+    const userData = await axios(`${Base_Url}/api/v1/users/login`, {
       method: 'POST',
       mode: 'cors',
       withCredentials: true,
@@ -28,7 +28,7 @@ export async function signup(data) {
   try {
     const response = await axios({
       method: 'POST',
-      url: `${Base_Url}api/v1/users/signup`,
+      url: `${Base_Url}/api/v1/users/signup`,
       mode: 'cors',
       withCredentials: true,
 
@@ -48,7 +48,7 @@ export async function signup(data) {
 
 export async function getCurrentUser() {
   try {
-    const response = await axios(`${Base_Url}api/v1/users/currentuser`, {
+    const response = await axios(`${Base_Url}/api/v1/users/currentuser`, {
       withCredentials: true,
     });
     const currentUser = response.data.user;
@@ -61,9 +61,10 @@ export async function updateUserPhoto(data) {
   try {
     const formData = new FormData();
     formData.append('image', data);
+
     const response = await axios({
       method: 'PATCH',
-      url: `${Base_Url}api/v1/users/uploadphoto`,
+      url: `${Base_Url}/api/v1/users/uploadphoto`,
       data: formData,
 
       withCredentials: true,
@@ -79,7 +80,7 @@ export async function updateUserPhoto(data) {
 
 export async function logout() {
   await axios({
-    url: `${Base_Url}api/v1/users/logout`,
+    url: `${Base_Url}/api/v1/users/logout`,
     method: 'POST',
     credentials: 'same-origin',
     withCredentials: true,
@@ -87,7 +88,7 @@ export async function logout() {
 }
 export async function updateUserInfo(data) {
   await axios({
-    url: `${Base_Url}api/v1/users/updateinfo`,
+    url: `${Base_Url}/api/v1/users/updateinfo`,
     method: 'POST',
     withCredentials: true,
     data,
@@ -95,7 +96,7 @@ export async function updateUserInfo(data) {
 }
 export async function updatePasswordApi(data) {
   await axios({
-    url: `${Base_Url}api/v1/users/updatepassword`,
+    url: `${Base_Url}/api/v1/users/updatepassword`,
     method: 'POST',
     withCredentials: true,
     data,
@@ -106,7 +107,7 @@ export async function searchFriends(data) {
   // const searchText = data.queryKey[1];
   if (!data || data.length <= 2) return [];
 
-  const response = await axios(`${Base_Url}api/v1/users/search/${data}`, {
+  const response = await axios(`${Base_Url}/api/v1/users/search/${data}`, {
     withCredentials: true,
   });
   return response.data.friends;
@@ -117,7 +118,7 @@ export async function autoComplete(data) {
   if (!searchText || searchText.length <= 2) return [];
 
   const response = await axios(
-    `${Base_Url}api/v1/users/autocomplete/${searchText}`,
+    `${Base_Url}/api/v1/users/autocomplete/${searchText}`,
     {
       withCredentials: true,
     }
@@ -128,7 +129,7 @@ export async function autoComplete(data) {
 
 export async function getFriendPage(data) {
   const id = data.queryKey[1];
-  const response = await axios(`${Base_Url}api/v1/users/friendpage/${id}`, {
+  const response = await axios(`${Base_Url}/api/v1/users/friendpage/${id}`, {
     withCredentials: true,
   });
 

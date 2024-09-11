@@ -27,8 +27,8 @@ const PersonalAccountImg = styled.img`
 `;
 
 function UserAccount({ user, personal = true }) {
-  const { friendId } = useParams();
-  const { isMyFriend } = useIsMyFriend(friendId);
+  // const { friendId } = useParams();
+  const { isMyFriend } = useIsMyFriend('');
   return (
     <StyledPersonalDiv>
       <div>

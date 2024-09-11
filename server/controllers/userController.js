@@ -45,13 +45,12 @@ exports.getCurrentUser = catchAsync(async (req, res) => {
 });
 
 exports.uploadPhoto = catchAsync(async (req, res, next) => {
-  console.log(req.file);
   if (!req.file.mimetype.startsWith('image'))
     return next(new AppError('The file you attached is not image ', 406));
   const updatedUser = await User.findByIdAndUpdate(req.user._id, {
     photo: req.file.filename,
   });
-  console.log(updatedUser);
+  // console.log(updatedUser);
   res.status(204).json({
     status: 'success',
     data: updatedUser,

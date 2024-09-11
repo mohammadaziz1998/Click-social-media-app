@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useCurrentUser } from './useCurrentUser';
 import { useUpdateUserPhoto } from './useUpdateUserPhoto';
 import Button from '../../ui/Button';
 
