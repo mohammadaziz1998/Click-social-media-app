@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { formatDistanceToNow } from 'date-fns';
-import { Link } from 'react-router-dom';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledUserNotification = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ function UserNotification({ children, photo, name, date }) {
   return (
     // <Link to="/friends/friendrequest">
     <StyledUserNotification>
-      <img src={`/images/profile/${photo}`} alt={`${name}`} />
+      <img src={`${Base_Url}/images/profile/${photo}`} alt={`${name}`} />
       <StyledUserNotificationDiv>
         <StyledUserNotificationName>
           <strong>{name}</strong>

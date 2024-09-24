@@ -6,6 +6,7 @@ import Modal from '../../ui/Modal';
 import { useState } from 'react';
 import Like from './Like';
 import { formatDistanceToNow } from 'date-fns';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledPostDiv = styled.div`
   /* position: relative; */
@@ -47,7 +48,7 @@ function Post({ post }) {
     <StyledPostDiv>
       <UserNav imgUrl={user.photo} name={user.name} sizes="medium" />
       <span>{formatDistanceToNow(createdAt)}</span>
-      <img src={`/images/posts/${photo}`} alt="post" />
+      <img src={`${Base_Url}/images/posts/${photo}`} alt="post" />
       <p>{text}</p>
       <StyledPostFooterDiv>
         <button onClick={() => setLike((like) => !like)}>

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useUpdateUserPhoto } from './useUpdateUserPhoto';
 import Button from '../../ui/Button';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 function UploadUserPhotoForm({ img, personal }) {
   // const { currentUser } = useCurrentUser();
   const { updateUserPhoto } = useUpdateUserPhoto();
   const [userPhoto, setUserPhoto] = useState('');
-  console.log(userPhoto);
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -16,7 +16,7 @@ function UploadUserPhotoForm({ img, personal }) {
   return (
     <form encType="multipart/form-data">
       <img
-        src={`/images/profile/${img}`}
+        src={`${Base_Url}/images/profile/${img}`}
         alt="personal-user"
         width="400"
         height="400"

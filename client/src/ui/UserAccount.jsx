@@ -5,7 +5,7 @@ import UploadUserPhotoForm from '../features/user/UploadUserPhotoForm';
 
 import AddFriendButton from '../features/friendship/AddFriendButton';
 import { useIsMyFriend } from '../features/friendship/useIsMyFriend';
-import { useParams } from 'react-router-dom';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledPersonalDiv = styled.div`
   /* background-color: var(--color-green-05); */
@@ -36,7 +36,7 @@ function UserAccount({ user, personal = true }) {
           <Modal.Open opens={`personal-${user?.name}`}>
             <span>
               <PersonalAccountImg
-                src={`/images/profile/${user?.photo}`}
+                src={`${Base_Url}/images/profile/${user?.photo}`}
                 alt="personal-user"
                 width="200"
                 height="200"

@@ -4,20 +4,38 @@ const Comment = require('../models/commentsModel');
 const User = require('../models/userModel');
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
-  const posts = await Post.find().populate({
-    path: 'user',
-    select: ['name', 'photo', 'active'],
-  });
+  // const posts = await Post.find().populate({
+  //   path: 'user',
+  //   select: ['name', 'photo', 'active'],
+  // });
 
-  if (!posts)
-    return next(new AppError('Somthing went wrong while fetching posts', 401));
-  const sortedPost = posts.sort((a, b) => b.createdAt - a.createdAt);
+  // if (!posts)
+  //   return next(new AppError('Somthing went wrong while fetching posts', 401));
+  // const sortedPost = posts.sort((a, b) => b.createdAt - a.createdAt);
+  // res.status(200).json({
+  //   status: 'success',
+  //   result: posts.length,
+  //   data: {
+  //     data: sortedPost,
+  //   },
+  // });
+  const { page = 0, pageSize = 10 } = req.query;
+  console.log(page, pageSize);
+  const posts = await Post.aggregate([
+    {
+      $facet: {
+        data: [
+          { $sort: { createdAt: -1 } },
+          { $skip: page * pageSize },
+          { $limit: pageSize },
+        ],
+      },
+    },
+  ]);
+
   res.status(200).json({
     status: 'success',
-    result: posts.length,
-    data: {
-      data: sortedPost,
-    },
+    data: posts[0].data,
   });
 });
 exports.createPost = catchAsync(async (req, res, next) => {

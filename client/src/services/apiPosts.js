@@ -1,15 +1,18 @@
 import axios from 'axios';
 const Base_Url = import.meta.env.VITE_API_URL;
-export async function getPosts() {
+export async function getPosts(data) {
+  const { pageParam } = data;
   try {
-    const response = await axios.get(`${Base_Url}/api/v1/posts`, {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include', // Don't forget to specify this if you need cookies
-    });
-
+    const response = await axios.get(
+      `${Base_Url}/api/v1/posts?page=${pageParam}`,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Don't forget to specify this if you need cookies
+      }
+    );
     return response.data.data;
   } catch (err) {
     console.log('ERROR🧧', err);

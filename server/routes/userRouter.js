@@ -5,22 +5,6 @@ const router = express.Router();
 const photoUpload = require('../utils/photoUpload');
 const handleImage = require('../utils/handleImage');
 
-// const multer = require('multer');
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, `../client/public/images/profile`);
-//   },
-//   filename: function (req, file, cb) {
-//     const uniquePhotoName = `${Date.now()}-${Math.random(
-//       Math.random() * 1000
-//     )}-${req.user.name}.${file.mimetype.split('/')[1]}`;
-
-//     cb(null, uniquePhotoName);
-//   },
-// });
-// const upload = multer({ storage: storage });
-
 /////////
 /////////
 /////////

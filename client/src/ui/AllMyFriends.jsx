@@ -3,6 +3,7 @@ import { useCurrentUser } from '../features/user/useCurrentUser';
 import UserNav from './UserNav';
 import { IoMdMore } from 'react-icons/io';
 import { Link, NavLink } from 'react-router-dom';
+const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledAllMyFriend = styled.div`
   margin-inline: auto;

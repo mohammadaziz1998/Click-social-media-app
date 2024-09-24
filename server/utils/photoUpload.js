@@ -4,7 +4,7 @@ module.exports = function uploadPhoto(path) {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       console.log(file);
-      cb(null, `../client/public/images/${path}`);
+      cb(null, `./public/images/${path}`);
     },
     filename: function (req, file, cb) {
       const uniquePhotoName = `${Date.now()}-${Math.random(

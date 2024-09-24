@@ -61,7 +61,6 @@ export async function updateUserPhoto(data) {
   try {
     const formData = new FormData();
     formData.append('image', data);
-
     const response = await axios({
       method: 'PATCH',
       url: `${Base_Url}/api/v1/users/uploadphoto`,
