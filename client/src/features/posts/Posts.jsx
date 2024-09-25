@@ -19,6 +19,7 @@ function Posts() {
     fetchNextPage,
     isFetchingNextPage,
   } = usePosts();
+
   useEffect(() => {
     if (inView) fetchNextPage();
   }, [inView, fetchNextPage]);
@@ -29,7 +30,10 @@ function Posts() {
         <Spinner />
       ) : (
         posts?.map((posts) =>
-          posts?.map((post) => <Post post={post} key={post._id} />)
+          posts?.map((post) => {
+            const user = post.usersPost[0];
+            return <Post post={post} user={user} key={post._id} />;
+          })
         )
       )}
       {isFetchingNextPage && <SpinnerMini />}

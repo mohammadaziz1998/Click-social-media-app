@@ -21,8 +21,8 @@ router.patch(
   '/uploadphoto',
   authController.protect,
   // upload.single('image'),
-  photoUpload('profile').single('image'),
-  // handleImage,
+  photoUpload().single('image'),
+  handleImage('profile'),
   userController.uploadPhoto
 );
 router.post('/', userController.createUsers);

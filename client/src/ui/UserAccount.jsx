@@ -8,11 +8,12 @@ import { useIsMyFriend } from '../features/friendship/useIsMyFriend';
 const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledPersonalDiv = styled.div`
-  /* background-color: var(--color-green-05); */
+  background-color: var(--color-green-100);
   margin: 2rem auto;
-  max-width: 50rem;
-  height: auto;
+  width: min(750px, 100%);
+  /* height: auto; */
   display: grid;
+  padding: 1rem;
   grid-template-columns: repeat(2, 1fr);
   div {
     display: flex;

@@ -3,11 +3,10 @@ import { useCurrentUser } from './useCurrentUser';
 
 function UserPosts() {
   const { currentUser } = useCurrentUser();
-
   return (
     <div>
       {currentUser?.posts?.map((post) => (
-        <Post post={post} key={post._id} />
+        <Post post={post} user={post.user} key={post._id} />
       ))}
     </div>
   );

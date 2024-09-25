@@ -9,10 +9,10 @@ import { formatDistanceToNow } from 'date-fns';
 const Base_Url = import.meta.env.VITE_API_URL;
 
 const StyledPostDiv = styled.div`
-  /* position: relative; */
+  position: relative;
   /* z-index: -1; */
   margin-top: 1.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   width: min(650px, 100%);
   margin-inline: auto;
   background-color: var(--color-green-100);
@@ -21,36 +21,32 @@ const StyledPostDiv = styled.div`
   border-radius: 4px;
 `;
 
-const StyledPostFooterDiv = styled.div`
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 1.5rem;
+const StyledPostReactionDiv = styled.div`
   border-radius: 4px;
-  float: left;
+  display: flex;
   button {
-    border-radius: 10px;
-    font-size: 1rem;
+    flex-grow: 1;
     border: none;
     background-color: var(--color-green-05);
   }
-  @media (min-width: 600px) {
-    button {
-      width: 100px;
-      height: 20px;
-    }
+  button:hover {
+    background-color: var(--color-hover);
   }
 `;
-function Post({ post }) {
-  const { text, user, createdAt, photo } = post;
+const StyledPostTime = styled.div`
+  margin: 0 0 10px 50px;
+  font-size: 0.9rem;
+`;
+function Post({ post, user }) {
+  const { text, createdAt, photo } = post;
   const [like, setLike] = useState(false);
   return (
     <StyledPostDiv>
       <UserNav imgUrl={user.photo} name={user.name} sizes="medium" />
-      <span>{formatDistanceToNow(createdAt)}</span>
+      <StyledPostTime>{formatDistanceToNow(createdAt)}</StyledPostTime>
       <img src={`${Base_Url}/images/posts/${photo}`} alt="post" />
       <p>{text}</p>
-      <StyledPostFooterDiv>
+      <StyledPostReactionDiv>
         <button onClick={() => setLike((like) => !like)}>
           <FaRegHeart />
           {like && <Like />}
@@ -64,7 +60,7 @@ function Post({ post }) {
           </Modal.Window>
         </Modal>
         <button>Share</button>
-      </StyledPostFooterDiv>
+      </StyledPostReactionDiv>
     </StyledPostDiv>
   );
 }

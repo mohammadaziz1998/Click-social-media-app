@@ -16,21 +16,13 @@ import { Link, NavLink } from 'react-router-dom';
 import DarkModeToogle from './DarkModeToogle';
 import NotificationBar from '../features/notification/NotificationBar';
 import { useState } from 'react';
-import { useNotification } from '../features/notification/useNotification';
 
 const StyledHeader = styled.header`
-  position: relative;
   grid-column: 1/-1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* display: grid;
-  grid-template-columns: 0.5fr 2fr 2fr; */
-  padding: 0 1rem 0 1rem;
-  box-shadow: inset;
-
-  @media (max-width: 600px) {
-  }
+  padding: 0.3rem 1rem;
 `;
 
 const HeaderNav = styled.div`
@@ -48,7 +40,6 @@ const HeaderNav = styled.div`
 function Header() {
   const { currentUser } = useCurrentUser();
   const [notification, setNotification] = useState(false);
-  const { notifications } = useNotification();
   return (
     <StyledHeader>
       <Logo />

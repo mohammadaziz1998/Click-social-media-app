@@ -20,7 +20,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
   //   },
   // });
   const { page = 0, pageSize = 10 } = req.query;
-  console.log(page, pageSize);
+
   const posts = await Post.aggregate([
     {
       $facet: {
@@ -28,6 +28,14 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
           { $sort: { createdAt: -1 } },
           { $skip: page * pageSize },
           { $limit: pageSize },
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'user',
+              foreignField: '_id',
+              as: 'usersPost',
+            },
+          },
         ],
       },
     },
@@ -42,7 +50,7 @@ exports.createPost = catchAsync(async (req, res, next) => {
   const newPost = {
     user: req.user._id,
     text: req.body.text,
-    photo: req.file.filename,
+    photo: req.file.newPhotoName,
   };
   console.log('image from post ', req.file);
   console.log(req.body);

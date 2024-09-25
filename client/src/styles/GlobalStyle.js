@@ -17,8 +17,8 @@ const GlobalStyle = createGlobalStyle`
     /* --color-green-00:linear-gradient(90deg, rgba(28,53,48,1) 0%, rgba(44,111,99,1) 32%, rgba(81,149,137,1) 54%, rgba(81,149,137,1) 66%, rgba(45,138,122,1) 100%); */
     --color-green-50:#2b747e;
     
-      --color-green-100: #cdcdcd;
-      --color-green-200: #cdcdcd;
+      /* --color-green-100: #cdcdcd; */
+      --color-green-100: #e3e3e3;
       --color-background:#ffff;
       --color-text:#000;
       --color-input-text:#044965;
